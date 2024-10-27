@@ -1,0 +1,9 @@
+{
+  "name": "Alantiix-FreeBuild",
+  "version_number": "1.0.0",
+  "website_url": "",
+  "description": "Ignores all building restrictions. Note: item will show as red, but will still allow you to place it",
+  "dependencies": [
+
+  ]
+}

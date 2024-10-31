@@ -29,6 +29,22 @@ jobs:
 
     - name: Build Alantiix.Sunkenland.FreeBuild for Release
       run: msbuild Alantiix.Sunkenland.FreeBuild.sln -property:Configuration=Release -property:platform="Any CPU"
+
+  release:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - uses: actions/checkout@v2
+      - uses: CupOfTea696/gh-action-auto-release@v1.0.0
+        with:
+          title: "Release: $version"
+          tag: "v$semver"
+          draft: false
+          regex: "/^Release: #{semver}$/i"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
       
    # - name: Run Tests
    #   run: vstest.console.exe .\RandomString4NetTest\bin\Release\RandomString4NetTest.dll

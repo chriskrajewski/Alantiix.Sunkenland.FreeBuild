@@ -34,6 +34,9 @@ jobs:
   # You may pin to the exact commit or the version.
   # uses: PSModule/Auto-Release@fa6ac2f6fefd044e80d60f5cfcfe8dd3bd3cb670
       uses: PSModule/Auto-Release@v1.7.14
+      env: 
+        GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        
 
           
       

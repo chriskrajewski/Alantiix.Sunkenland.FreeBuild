@@ -11,18 +11,29 @@ on:
 
 jobs:
   build:
-
-    runs-on: ubuntu-latest
-
+    runs-on: windows-latest
     steps:
-    - uses: actions/checkout@v4
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v4
-      with:
-        dotnet-version: 4.7.2
-    - name: Restore dependencies
-      run: dotnet restore
-    - name: Build
-      run: dotnet build --no-restore
-    - name: Test
-      run: dotnet test --no-build --verbosity normal
+    - uses: actions/checkout@v4.1.1
+
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v1.3.1
+      
+    - name: Setup VSTest
+      uses: darenm/Setup-VSTest@v1.2
+      
+    - name: Setup NuGet
+      uses: NuGet/setup-nuget@v1.2.0
+
+    - name: Restore NuGet packages
+      run: nuget restore Alantiix.Sunkenland.FreeBuild.sln
+
+    - name: Build Alantiix.Sunkenland.FreeBuild for Release
+      run: msbuild Alantiix.Sunkenland.FreeBuild.sln -property:Configuration=Release -property:platform="Any CPU"
+      
+   # - name: Run Tests
+   #   run: vstest.console.exe .\RandomString4NetTest\bin\Release\RandomString4NetTest.dll
+
+  #  - name: Upload coverage reports to Codecov
+  #    uses: codecov/codecov-action@v3
+   #   env:
+    #    CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
